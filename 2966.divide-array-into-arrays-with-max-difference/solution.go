@@ -1,7 +1,7 @@
 func divideArray(nums []int, k int) [][]int {
     var res [][]int
     
-    sort.Ints(nums)
+    slices.Sort(nums)
     for i := 0; i < len(nums); i += 3 {
         if nums[i+2] - nums[i] > k {
             return nil
