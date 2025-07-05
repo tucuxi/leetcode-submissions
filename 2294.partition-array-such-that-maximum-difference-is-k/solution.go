@@ -1,5 +1,5 @@
 func partitionArray(nums []int, k int) int {
-    sort.Ints(nums)
+    slices.Sort(nums)
     count := 1
     i := 0
     for j := 1; j < len(nums); j++ {
