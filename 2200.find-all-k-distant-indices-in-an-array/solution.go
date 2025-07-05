@@ -1,5 +1,5 @@
 func findKDistantIndices(nums []int, key int, k int) []int {
-    h := map[int]bool{}
+    h := make(map[int]bool)
     for i := range nums {
         if nums[i] == key {
             for j := 0; j <= k; j++ {
@@ -12,7 +12,7 @@ func findKDistantIndices(nums []int, key int, k int) []int {
             }
         }
     }
-    res := []int{}
+    var res []int
     for i := range nums {
         if h[i] {
             res = append(res, i)
