@@ -1,14 +1,8 @@
 class Solution {
     fun maximumDifference(nums: IntArray): Int {
-        var min = nums[0]
-        var res = -1
-        for (n in nums) {
-            if (min < n) {
-                res = maxOf(res, n - min)
-            } else {
-                min = n
-            }
+        val (_, maxDiff) = nums.fold(nums.first() to 0) { (minNum, maxDiff), num ->
+            minOf(minNum, num) to maxOf(maxDiff, num - minNum)
         }
-        return res
+        return if (maxDiff == 0) -1 else maxDiff
     }
 }
