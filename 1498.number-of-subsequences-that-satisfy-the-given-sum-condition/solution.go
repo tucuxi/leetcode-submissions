@@ -2,7 +2,7 @@ const mod = 1_000_000_007
 
 func numSubseq(nums []int, target int) int {
     e := exp(len(nums))
-    sort.Ints(nums)
+    slices.Sort(nums)
     res := 0
     for p, q := 0, len(nums) - 1; p <=q; {
         if nums[p] + nums[q] > target {
