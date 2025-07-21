@@ -1,7 +1,5 @@
 func maxValue(events [][]int, k int) int {
-    sort.Slice(events, func(i, j int) bool {
-        return events[i][0] < events[j][0]
-    })
+    slices.SortFunc(events, func(a, b []int) int { return a[0] - b[0] })
     dp := make([][]int, k + 1)
     for i := range dp {
         dp[i] = make([]int, len(events))
@@ -26,11 +24,4 @@ func maxValue(events [][]int, k int) int {
     }
     
     return dfs(0, k) 
-}
-
-func max(a, b int) int {
-    if a > b {
-        return a
-    }
-    return b
 }
