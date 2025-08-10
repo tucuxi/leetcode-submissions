@@ -1,13 +1,11 @@
 func totalFruit(fruits []int) int {
-    basket := map[int]int{}
-    max, cur := 0, 0
+    basket := make(map[int]int)
+    res, cur := 0, 0
     for l, r := 0, 0; r < len(fruits); r++ {
         basket[fruits[r]]++
         cur++
         if len(basket) <= 2 {
-            if cur > max {
-                max = cur
-            }
+            res = max(cur, res)
         } else {
             for {
                 t := fruits[l]
@@ -21,5 +19,5 @@ func totalFruit(fruits []int) int {
             }
         }
     }
-    return max
+    return res
 }
