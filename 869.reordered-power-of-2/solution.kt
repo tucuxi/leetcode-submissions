@@ -1,27 +1,26 @@
 class Solution {
     fun reorderedPowerOf2(n: Int): Boolean {
-        val digits = n.toString().toList().map { ch -> ch - '0' }
-        val visited = BooleanArray(digits.size)
+        val permutations = sequence<Int> {
+            val digits = n.toString().map { ch -> ch - '0' }
+            val visited = BooleanArray(digits.size)
 
-        fun dfs(acc: Int, remaining: Int, leading: Boolean): Boolean {
-            if (remaining == 0) {
-                return  isPowerOf2(acc)
-            }
-            var res = false
-            for (i in digits.indices) {
-                if (digits[i] == 0 && leading) {
-                    continue
+            suspend fun SequenceScope<Int>.dfs(acc: Int, remaining: Int) {
+                if (remaining == 0) {
+                    yield(acc)
+                    return
                 }
-                if (!visited[i]) {
-                    visited[i] = true
-                    res = res or dfs(10 * acc + digits[i], remaining - 1, false)
-                    visited[i] = false
+                for (i in digits.indices) {
+                    if (!visited[i] && (digits[i] != 0 || acc != 0)) {
+                        visited[i] = true
+                        dfs(10 * acc + digits[i], remaining - 1)
+                        visited[i] = false
+                    }
                 }
             }
-            return res
+
+            dfs(0, digits.size)
         }
-
-        return dfs(0, digits.size, true)
+        return permutations.any { isPowerOf2(it) }
     }
 
     fun isPowerOf2(n: Int) = n and (n - 1) == 0
