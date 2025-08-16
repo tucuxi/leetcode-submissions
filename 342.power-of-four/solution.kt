@@ -1,10 +1,5 @@
 class Solution {
     fun isPowerOfFour(n: Int): Boolean {
-        var m = n
-        while (m > 1) {
-            if (m % 4 != 0) return false
-            m /= 4
-        }
-        return m == 1
+        return n > 0 && n and (n - 1) == 0 && n and 0x55555555 == n
     }
 }
