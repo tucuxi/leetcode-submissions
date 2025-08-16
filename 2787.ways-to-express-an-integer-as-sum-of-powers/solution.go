@@ -32,7 +32,7 @@ func powers(n, x int) []int {
     var res []int
     for i := 1;; i++ {
         p := 1
-        for j := 0; j < x; j++ {
+        for range x {
             p *= i
         }
         if p > n {
