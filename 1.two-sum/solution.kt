@@ -1,11 +1,13 @@
 class Solution {
     fun twoSum(nums: IntArray, target: Int): IntArray {
-        val map = mutableMapOf<Int, Int>()
+        val numToIndex = mutableMapOf<Int, Int>()
         nums.forEachIndexed { index, num ->
-            val other = map[target - num]
-            if (other != null) return intArrayOf(index, other)
-            map[num] = index
+            val otherIndex = numToIndex.getOrElse(target - num) {
+                numToIndex[num] = index
+                return@forEachIndexed
+            }
+            return intArrayOf(otherIndex, index)
         }
-        return IntArray(0)
+        return intArrayOf()
     }
 }
