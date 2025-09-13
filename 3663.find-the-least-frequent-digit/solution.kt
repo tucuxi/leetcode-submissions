@@ -5,13 +5,12 @@ class Solution {
             .key
     }
 
-    tailrec fun digits(n: Int, acc: MutableMap<Int, Int> = mutableMapOf()): Map<Int, Int> {
+    tailrec fun digits(n: Int, acc: Map<Int, Int> = mapOf()): Map<Int, Int> {
         return if (n == 0) {
             acc
         } else {
             val d = n % 10
-            acc[d] = acc.getOrDefault(d, 0) + 1
-            digits(n / 10, acc)
+            digits(n / 10, acc + (d to acc.getOrDefault(d, 0) + 1))
         } 
     }
 }
