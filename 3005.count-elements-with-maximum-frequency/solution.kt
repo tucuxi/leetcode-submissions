@@ -1,12 +1,17 @@
 class Solution {
     fun maxFrequencyElements(nums: IntArray): Int {
-        val h = nums.asIterable()
-            .groupingBy { it }
-            .eachCount()
-            .values
-            .sortedByDescending { it }
-        val maxFrequency = h.first()
-        val m = h.takeWhile { it == maxFrequency }
-        return m.size * maxFrequency        
+        val histogram = IntArray(101)
+        var maxFrequency = 0
+        var result = 0
+        nums.forEach { n ->
+            histogram[n]++
+            if (histogram[n] == maxFrequency) {
+                result += maxFrequency
+            } else if (histogram[n] > maxFrequency) {
+                maxFrequency = histogram[n]
+                result = maxFrequency
+            }
+        }
+        return result
     }
 }
