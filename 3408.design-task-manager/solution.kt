@@ -36,12 +36,14 @@ class TaskManager(tasks: List<List<Int>>) {
     }
 
     fun execTop(): Int {
-        return if (orderedTasks.isNotEmpty()) {
+        return if (orderedTasks.isEmpty()) {
+            -1
+        } else {
             val item = orderedTasks.first()
             orderedTasks.remove(item)
             tasksById.remove(item.taskId)
             item.userId
-        } else -1
+        }
     }
 
 }
