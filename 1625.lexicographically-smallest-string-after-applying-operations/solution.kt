@@ -4,11 +4,15 @@ class Solution {
         val visited = mutableSetOf(s)
         var res = s
 
+        fun visit(str: String) {
+            if (visited.add(str)) queue.add(str)
+        }
+
         while (queue.isNotEmpty()) {
             val t = queue.removeFirst()
             res = minOf(t, res)
-            accumulate(t, a).let { if (visited.add(it)) queue.add(it) }
-            rotate(t, b).let { if (visited.add(it)) queue.add(it) }
+            accumulate(t, a).let { visit(it) }
+            rotate(t, b).let { visit(it) }
         }
 
         return res
