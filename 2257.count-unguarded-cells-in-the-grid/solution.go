@@ -32,7 +32,6 @@ func countUnguarded(m int, n int, guards [][]int, walls [][]int) int {
                 unguarded++
             }
         }
-        fmt.Println()
     }
     return unguarded
 }
