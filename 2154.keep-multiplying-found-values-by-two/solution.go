@@ -1,10 +1,11 @@
 func findFinalValue(nums []int, original int) int {
-    numSet := map[int]bool{}
+    v := make([]bool, 1001)
     for _, n := range nums {
-        numSet[n] = true
+        v[n] = true
     }
-    for numSet[original] {
-        original *= 2
-    } 
-    return original
+    n := original
+    for n < len(v) && v[n] {
+        n += n
+    }
+    return n
 }
