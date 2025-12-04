@@ -1,10 +1,7 @@
 class Solution {
     fun minMoves(nums: IntArray): Int {
-        var sum = 0
-        var maxNum = 0
-        nums.forEach {
-            sum += it
-            maxNum = maxOf(it, maxNum)
+        val (sum, maxNum) = nums.fold(0 to 0) { (sum, maxNum), num ->
+            sum + num to maxOf(maxNum, num)
         }
         return nums.size * maxNum - sum
     }
