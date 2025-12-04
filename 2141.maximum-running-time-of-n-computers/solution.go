@@ -18,10 +18,3 @@ func maxRunTime(n int, batteries []int) int64 {
     }
     return lo
 }
-
-func min(a, b int64) int64 {
-    if a < b {
-        return a
-    }
-    return b
-}
