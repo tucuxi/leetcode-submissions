@@ -10,8 +10,8 @@ func minBitwiseArray(nums []int) []int {
             c[x] = i
         }
     }
-
-    var ans []int
+    
+    ans := make([]int, 0, len(nums))
 
     for _, n := range nums {
         ans = append(ans, c[n])
