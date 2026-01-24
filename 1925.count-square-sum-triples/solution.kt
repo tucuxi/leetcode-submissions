@@ -1,10 +1,10 @@
 class Solution {
     fun countTriples(n: Int): Int {
         var res = 0
-        for (i in 1..n) {
-            for (j in 1..n) {
-                for (k in 1..n) {
-                    if (i * i + j * j == k * k) {
+        for (a in 1 .. n) {
+            for (b in 1 .. n) {
+                for (c in 1 .. n) {
+                    if (a * a + b * b == c * c) {
                         res++
                     }
                 }
