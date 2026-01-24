@@ -4,7 +4,7 @@ func maximizeSquareHoleArea(n int, m int, hBars []int, vBars []int) int {
 }
 
 func maxGap(l int, bars []int) int {
-    sort.Ints(bars)
+    slices.Sort(bars)
     r, m := 1, 1
     for i := 1; i < len(bars); i++ {
         if bars[i] == bars[i-1] + 1 {
@@ -17,11 +17,4 @@ func maxGap(l int, bars []int) int {
         }
     }
     return m
-}
-
-func min(a, b int) int {
-    if a < b {
-        return a
-    }
-    return b
 }
