@@ -8,37 +8,27 @@
  *     var right: TreeNode? = null
  * }
  */
+const val MOD = 1_000_000_007
+
 class Solution {
     fun maxProduct(root: TreeNode?): Int {
-        val sumRoot = sumTree(root)
-        val totalSum = sumRoot?.`val` ?: 0 
-        var maxProd: Long = 0
-        
-        fun recurse(root: TreeNode) {
-            if (root.left != null) {
-                maxProd = maxOf(maxProd, root.left.`val` * (totalSum - root.left.`val`).toLong())
-                recurse(root.left)
-            }
-            if (root.right != null) {
-                maxProd = maxOf(maxProd, root.right.`val` * (totalSum - root.right.`val`).toLong())
-                recurse(root.right)
-            }
+        val allSums = mutableListOf<Long>()
+
+        fun calculateSum(node: TreeNode?): Long {
+            if (node == null) return 0L
+            val currentSum = node.`val` + calculateSum(node.left) + calculateSum(node.right)
+            allSums.add(currentSum)
+            return currentSum
         }
 
-        if (sumRoot != null) { 
-            recurse(sumRoot)
+        val totalSum = calculateSum(root)
+        var maxProduct = 0L
+
+        for (sum in allSums) {
+            val product = sum * (totalSum - sum)
+            if (product > maxProduct) maxProduct = product
         }
-        return (maxProd % 1_000_000_007).toInt()
+
+        return (maxProduct % MOD).toInt()
     }
-    
-    fun sumTree(root: TreeNode?): TreeNode? {
-        if (root == null) return null
-        val leftChild = sumTree(root.left)
-        val rightChild = sumTree(root.right)
-        val sum = (leftChild?.`val` ?: 0) + (rightChild?.`val` ?: 0) + root.`val`
-        return TreeNode(sum).apply {
-            left = leftChild
-            right = rightChild
-        }
-    } 
 }

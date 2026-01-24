@@ -1,42 +1,34 @@
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+
+const MOD = 1_000_000_007
+
 func maxProduct(root *TreeNode) int {
-    sumRoot := sumTree(root)
-    if sumRoot == nil {
-        return 0
-    }
-    totalSum := sumRoot.Val
-    var maxProd int64
-    var recurse func(*TreeNode)
-    recurse = func(root *TreeNode) {
-        if root.Left != nil {
-            if m := int64(root.Left.Val) * int64(totalSum - root.Left.Val); m > maxProd {
-                maxProd = m
-            }
-            recurse(root.Left)
+    var allSums []int
+    var calculateSums func(*TreeNode) int
+
+    calculateSums = func(root *TreeNode) int {
+        if root == nil {
+            return 0
         }
-        if root.Right != nil {
-            if m := int64(root.Right.Val) * int64(totalSum - root.Right.Val); m > maxProd {
-                maxProd = m
-            }
-            recurse(root.Right)
-        }
+        sum := root.Val + calculateSums(root.Left) + calculateSums(root.Right)
+        allSums = append(allSums, sum)
+        return sum
     }
 
-    recurse(sumRoot)
-    return int(maxProd % 1_000_000_007)
-}
+    totalSum := calculateSums(root)
+    maxProduct := 0
+    
+    for _, sum := range allSums {
+        product := sum * (totalSum - sum)
+        maxProduct = max(maxProduct, product)
+    }
 
-func sumTree(root *TreeNode) *TreeNode {
-    if root == nil {
-        return nil
-    }
-    sum := root.Val
-    leftChild := sumTree(root.Left)
-    rightChild := sumTree(root.Right)
-    if leftChild != nil {
-        sum += leftChild.Val
-    }
-    if rightChild != nil {
-        sum += rightChild.Val
-    }
-    return &TreeNode{sum, leftChild, rightChild}
+    return maxProduct % MOD
 }
