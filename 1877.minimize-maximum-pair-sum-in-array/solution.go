@@ -1,13 +1,9 @@
 func minPairSum(nums []int) int {
-    sort.Ints(nums)
-    max := 0
-    i, j := 0, len(nums) - 1
-    for i < j {
-        if sum := nums[i] + nums[j]; sum > max {
-            max = sum
-        }
-        i++
-        j--
+    slices.Sort(nums)
+    last := len(nums) - 1
+    res := 0
+    for i := range len(nums) / 2 {
+        res = max(res, nums[i] + nums[last - i])
     }
-    return max
+    return res
 }
