@@ -4,8 +4,8 @@ class Skiplist() {
 
     private val sentinel = SkipNode(0, MAX_LEVEL)
 
-    private fun findPredecessors(target: Int): Array<SkipNode<Int>?> {
-        val preds = arrayOfNulls<SkipNode<Int>>(MAX_LEVEL + 1)
+    private fun findPredecessors(target: Int): Array<SkipNode<Int>> {
+        val preds = Array(MAX_LEVEL + 1) { sentinel }
         var node = sentinel
         
         for (i in MAX_LEVEL downTo 0) {
@@ -41,23 +41,23 @@ class Skiplist() {
         val newNode = SkipNode(num, newLevel)
 
         for (i in 0..newLevel) {
-            newNode.next[i] = preds[i]!!.next[i]
-            preds[i]!!.next[i] = newNode
+            newNode.next[i] = preds[i].next[i]
+            preds[i].next[i] = newNode
         }
     }
 
     fun erase(num: Int): Boolean {
         val preds = findPredecessors(num)
-        val candidate = preds[0]!!.next[0]
+        val candidate = preds[0].next[0]
 
         if (candidate == null || candidate.value != num) {
             return false
         }
         for (i in 0..MAX_LEVEL) {
-            if (preds[i]!!.next[i] != candidate) {
+            if (preds[i].next[i] != candidate) {
                 break
             }
-            preds[i]!!.next[i] = candidate.next[i]
+            preds[i].next[i] = candidate.next[i]
         }
         return true
     }
