@@ -10,25 +10,29 @@ func balanceBST(root *TreeNode) *TreeNode {
     return build(inorder(root))
 }
 
-func inorder(root *TreeNode) []int {
-    var sorted []int
+func inorder(root *TreeNode) []*TreeNode {
+    var ordered []*TreeNode
     var traverse func(*TreeNode)
     
     traverse = func(root *TreeNode) {
         if root != nil {
             traverse(root.Left)
-            sorted = append(sorted, root.Val)
+            ordered = append(ordered, root)
             traverse(root.Right)
         }
     }
+
     traverse(root)
-    return sorted
+    return ordered
 }
 
-func build(sorted []int) *TreeNode {
-    if len(sorted) == 0 {
+func build(nodes []*TreeNode) *TreeNode {
+    if len(nodes) == 0 {
         return nil
     }
-    m := len(sorted) / 2
-    return &TreeNode{sorted[m], build(sorted[:m]), build(sorted[m + 1:])}
+    m := len(nodes) / 2
+    node := nodes[m]
+    node.Left = build(nodes[:m])
+    node.Right = build(nodes[m + 1:])
+    return node
 }
