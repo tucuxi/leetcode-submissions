@@ -9,22 +9,27 @@
  */
 class Solution {
     fun addTwoNumbers(l1: ListNode?, l2: ListNode?): ListNode? {
-        val headSum = (l1?.`val` ?: 0) + (l2?.`val` ?: 0)
-        val headNode = ListNode(headSum % 10)
-        var prevNode = headNode
-        var carry = headSum / 10
-        var itr1 = l1
-        var itr2 = l2
-        while (true) {
-            itr1 = itr1?.next ?: null
-            itr2 = itr2?.next ?: null
-            if (itr1 == null && itr2 == null && carry == 0) break
-            val nextSum = (itr1?.`val` ?: 0) + (itr2?.`val` ?: 0) + carry
-            val nextNode = ListNode(nextSum % 10)
-            prevNode.next = nextNode
-            prevNode = nextNode
-            carry = nextSum / 10
+        val sentinel = ListNode(0)
+        var current = sentinel
+        var p1 = l1
+        var p2 = l2
+        var carry = 0
+
+        while (p1 != null || p2 != null || carry > 0) {
+            var sum = carry
+            if (p1 != null) {
+                sum += p1.`val`
+                p1 = p1.next
+            }
+            if (p2 != null) {
+                sum += p2.`val`
+                p2 = p2.next
+            }
+            current.next = ListNode(sum % 10)
+            current = current.next
+            carry = sum / 10
         }
-        return headNode
+
+        return sentinel.next
     }
 }
