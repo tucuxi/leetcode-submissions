@@ -11,19 +11,10 @@ func countPrimeSetBits(left int, right int) int {
     }
     c := 0
     for i := left; i <= right; i++ {
-        s := countSetBits(i)
+        s := bits.OnesCount(uint(i))
         if primes[s] {
             c++
         }
-    }
-    return c
-}
-
-func countSetBits(n int) int {
-    c := 0
-    for n != 0 {
-        n = n & (n-1)
-        c++
     }
     return c
 }
