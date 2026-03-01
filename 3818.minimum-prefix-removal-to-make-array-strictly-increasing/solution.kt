@@ -1,10 +1,9 @@
 class Solution {
     fun minimumPrefixLength(nums: IntArray): Int {
-        for (i in nums.lastIndex downTo 1) {
-            if (nums[i] <= nums[i - 1]) {
-                return i
-            }
+        var i = nums.lastIndex
+        while (i > 0 && nums[i - 1] < nums[i]) {
+            i--
         }
-        return 0
+        return i
     }
 }
