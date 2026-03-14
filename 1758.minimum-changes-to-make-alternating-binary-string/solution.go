@@ -9,10 +9,3 @@ func minOperations(s string) int {
     }
     return min(d, len(s) - d)
 }
-
-func min(a, b int) int {
-    if a < b {
-        return a
-    }
-    return b
-}
