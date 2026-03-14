@@ -17,12 +17,9 @@ func findKthBit(n int, k int) byte {
 func reverseInvert(b []bool) {
     l := 0
     r := len(b) - 1
-    for l < r {
+    for l <= r {
         b[l], b[r] = !b[r], !b[l]
         l++
         r--
-    }
-    if l == r {
-        b[l] = !b[l]
     }
 }
