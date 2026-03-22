@@ -1,12 +1,13 @@
 class Solution {
     fun reverseSubmatrix(grid: Array<IntArray>, x: Int, y: Int, k: Int): Array<IntArray> {
-        for (r in x until x + k / 2) {
+        var r1 = x
+        var r2 = x + k - 1
+        while (r1 < r2) {       
             for (c in y until y + k) {
-                val r2 = x + k - 1 - (r - x)
-                val h = grid[r][c]
-                grid[r][c] = grid[r2][c]
-                grid[r2][c] = h
+                grid[r1][c] = grid[r2][c].also { grid[r2][c] = grid[r1][c] }
             }
+            r1++
+            r2--
         }
         return grid
     }
