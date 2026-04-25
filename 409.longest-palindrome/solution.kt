@@ -5,8 +5,8 @@ class Solution {
             1 + s
                 .groupingBy { it }
                 .eachCount()
-                .map { (_, v) -> v / 2 * 2 }
-                .sum()
+                .values
+                .sumOf { it / 2 * 2 }
         )
     }
 }
