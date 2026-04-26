@@ -1,17 +1,16 @@
 func furthestDistanceFromOrigin(moves string) int {
-    var d, u int
+    left, right, any := 0, 0, 0
+
     for _, m := range moves {
         switch m {
-        case 'L':
-            d++
-        case 'R':
-            d--
-        case '_':
-            u++
+            case 'L':
+                left++
+            case 'R':
+                right++
+            default:
+                any++
         }
     }
-    if d < 0 {
-        d = -d
-    }
-    return u + d
+
+    return max(right - left, left - right) + any
 }
