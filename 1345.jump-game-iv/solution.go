@@ -1,7 +1,7 @@
 func minJumps(arr []int) int {
-    m := map[int][]int{}
-    for i := range arr {
-        m[arr[i]] = append(m[arr[i]], i)
+    m := make(map[int][]int)
+    for i, a := range arr {
+        m[a] = append(m[a], i)
     }
     v := make([]bool, len(arr))
     v[0] = true
