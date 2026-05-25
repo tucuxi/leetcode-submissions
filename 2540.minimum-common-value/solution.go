@@ -1,5 +1,5 @@
 func getCommon(nums1 []int, nums2 []int) int {
-    if len(nums1) < len(nums2) {
+    if len(nums1) > len(nums2) {
         nums1, nums2 = nums2, nums1
     }
     for _, n := range nums1 {
