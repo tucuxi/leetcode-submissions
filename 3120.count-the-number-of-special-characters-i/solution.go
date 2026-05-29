@@ -1,17 +1,12 @@
 func numberOfSpecialChars(word string) int {
-    h := make(map[rune]bool)
+    var h [64]bool
     res := 0
-    for _, r := range word {
-        if !h[r] {
-            h[r] = true
-            if unicode.IsLower(r){
-                if h[unicode.ToUpper(r)] {
-                    res++
-                }
-            } else {
-                if h[unicode.ToLower(r)] {
-                    res++
-                }                
+    for i := range word {
+        b := word[i] - 0x40
+        if !h[b] {
+            h[b] = true
+            if h[b^0x20] {
+                res++
             }
         }
     }
