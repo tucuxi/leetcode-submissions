@@ -1,4 +1,4 @@
-func leftRigthDifference(nums []int) []int {
+func leftRightDifference(nums []int) []int {
     l, r := 0, 0
     for _, n := range nums {
         r += n
