@@ -1,20 +1,13 @@
 class Solution {
     fun earliestFinishTime(landStartTime: IntArray, landDuration: IntArray, waterStartTime: IntArray, waterDuration: IntArray): Int {
-        return landStartTime.indices
-            .map { i ->
-                val landFinishTime = landStartTime[i] + landDuration[i]
-                
-                waterStartTime.indices
-                    .map { j ->
-                        val waterFinishTime = waterStartTime[j] + waterDuration[j]
-                        when {
-                            landFinishTime <= waterStartTime[j] -> waterFinishTime
-                            waterFinishTime <= landStartTime[i] -> landFinishTime
-                            else -> minOf(landFinishTime + waterDuration[j], waterFinishTime + landDuration[i])
-                        }
-                    }
-                    .min()
-            }
-            .min()
+        return minOf(
+            optimize(landStartTime, landDuration, waterStartTime, waterDuration),
+            optimize(waterStartTime, waterDuration, landStartTime, landDuration)
+        )
+    }
+
+    fun optimize(s1: IntArray, d1: IntArray, s2: IntArray, d2: IntArray): Int {
+        val t1 = (0 until s1.size).minOf { s1[it] + d1[it] }
+        return (0 until s2.size).minOf { maxOf(t1, s2[it]) + d2[it] }
     }
 }
