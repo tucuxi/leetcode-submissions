@@ -1,9 +1,23 @@
 func maxIceCream(costs []int, coins int) int {
-    sort.Ints(costs)
-    k := 0
-    for k < len(costs) && costs[k] <= coins {
-        coins -= costs[k]
-        k++
+    const maxCost = 100_000
+    var count [maxCost+1]int
+
+    for _, c := range costs {
+        count[c]++
     }
-    return k
+
+    res := 0
+    for c, n := range count {
+        if c > coins {
+            break
+        } 
+        if n == 0 {
+            continue
+        }
+        b := min(n, coins/c)
+        res += b
+        coins -= b*c
+    }
+
+    return res
 }
