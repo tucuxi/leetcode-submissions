@@ -6,18 +6,26 @@
  * }
  */
 func pairSum(head *ListNode) int {
-    stack := make([]int, 0)
-    for p:= head; p != nil; p = p.Next {
-        stack = append(stack, p.Val)
+    n := 0
+    for p := head; p != nil; p = p.Next {
+        n++
     }
-    max := 0
-    k := len(stack) / 2
+
+    st := make([]int, 0, n/2)
     p := head
-    for i := len(stack) - 1; i >= k; i-- {
-        if twin := p.Val + stack[i]; twin > max {
-            max = twin
-        }
+
+    for range n/2 {
+        st = append(st, p.Val)
         p = p.Next
     }
-    return max
+    
+    res := 0
+
+    for i := n/2 - 1; i >=0; i-- {
+        t := st[i]
+        res = max(res, p.Val + t)
+        p = p.Next
+    }
+
+    return res
 }
