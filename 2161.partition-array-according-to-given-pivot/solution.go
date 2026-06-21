@@ -9,17 +9,17 @@ func pivotArray(nums []int, pivot int) []int {
     }
 
     res := make([]int, len(nums))
-    p, q, r := 0, less, less + equal
+    i, j, k := 0, less, less + equal
     for _, n := range nums {
         if n < pivot {
-            res[p] = n
-            p++
+            res[i] = n
+            i++
         } else if n == pivot {
-            res[q] = n
-            q++
+            res[j] = n
+            j++
         } else {
-            res[r] = n
-            r++
+            res[k] = n
+            k++
         }
     }
 
