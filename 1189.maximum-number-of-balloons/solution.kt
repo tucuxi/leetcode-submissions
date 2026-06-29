@@ -4,6 +4,6 @@ class Solution {
         text.forEach {
             f[it - 'a']++
         }
-        return arrayOf(f['b'-'a'], f['a'-'a'], f['l'-'a'] / 2, f['o'-'a'] / 2, f['n'-'a']).min()!!
+        return listOf(f['b'-'a'], f['a'-'a'], f['l'-'a'] / 2, f['o'-'a'] / 2, f['n'-'a']).min()!!
     }
 }
