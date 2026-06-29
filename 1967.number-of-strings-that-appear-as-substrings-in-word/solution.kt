@@ -1,5 +1,5 @@
 class Solution {
     fun numOfStrings(patterns: Array<String>, word: String): Int {
-        return patterns.count { word.contains(it) }
+        return patterns.count { it in word }
     }
 }
