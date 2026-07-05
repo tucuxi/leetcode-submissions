@@ -29,10 +29,8 @@ func minScore(n int, roads [][]int) int {
     p := u.find(0)
     res := math.MaxInt
     for _, r := range roads {
-        if u.find(r[0] - 1) == p || u.find(r[1] - 1) == p {
-            if r[2] < res {
-                res = r[2]
-            }
+        if u.find(r[0] - 1) == p {
+            res = min(res, r[2])
         }
     }
     return res
