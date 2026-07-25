@@ -1,6 +1,6 @@
 class Solution {
     fun arrayRankTransform(arr: IntArray): IntArray {
-        val uniqueValues = arr.toSet().sorted()
-        return arr.map { uniqueValues.binarySearch(it) + 1 }.toIntArray()
+        val h = arr.toSet().sorted().withIndex().associate { it.value to it.index + 1 }
+        return IntArray(arr.size) { h[arr[it]]!! }
     }
 }
