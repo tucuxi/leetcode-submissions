@@ -1,7 +1,9 @@
-func PredictTheWinner(nums []int) bool {
-    memo := make([][]int, len(nums))
+func predictTheWinner(nums []int) bool {
+    n := len(nums)
+    memo := make([][]int, n)
+
     for i := range memo {
-        memo[i] = make([]int, len(nums))
+        memo[i] = make([]int, n)
         for j := range memo[i] {
             memo[i][j] = -1
         }
@@ -15,16 +17,9 @@ func PredictTheWinner(nums []int) bool {
         if memo[i][j] != -1 {
             return memo[i][j]
         }
-        memo[i][j] = max(nums[i] - dp(i + 1, j), nums[j] - dp(i, j - 1))
+        memo[i][j] = max(nums[i] - dp(i + 1, j), nums[j] - dp(i, j-1))
         return memo[i][j]
     }
     
-    return dp(0, len(nums) - 1) >= 0
-}
-
-func max(a, b int) int {
-    if a > b {
-        return a
-    }
-    return b
+    return dp(0, n-1) >= 0
 }
