@@ -12,9 +12,7 @@ func minOperations(nums []int, x int) int {
             curSum -= nums[p]
         }
         if curSum == target {
-            if l := q - p + 1; l > maxLen {
-                maxLen = l
-            }
+            maxLen = max(maxLen, q-p+1)
         }
     }
     if maxLen == -1 {
