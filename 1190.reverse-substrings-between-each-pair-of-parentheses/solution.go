@@ -13,25 +13,28 @@ func dfs(s string, pos int, inside bool) (string, int) {
                 b.WriteString(t)
                 pos = i
             case ')':
-                return reversedIfTrue(b.String(), inside), pos + 1
+                return toString(b, inside), pos + 1
             default:
                 b.WriteByte(s[pos])
                 pos++
         }
     }
 
-    return reversedIfTrue(b.String(), inside), pos
+    return toString(b, inside), pos
 }
 
-func reversedIfTrue(s string, reverse bool) string {
+func toString(b strings.Builder, reverse bool) string {
+    s := b.String()
+
     if !reverse {
         return s
     }
 
-    var b strings.Builder
+    r := make([]byte, len(s))
 
-    for i := len(s) - 1; i >= 0; i-- {
-        b.WriteByte(s[i])
-    } 
-    return b.String()
+    for i := range r {
+        r[i] = s[len(s) - 1 - i]
+    }
+    
+    return string(r)
 }
